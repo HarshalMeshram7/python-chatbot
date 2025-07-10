@@ -17,10 +17,16 @@ def load_json(file_path):
 def main():
     print("Welcome to the chatbot! Type 'exit', 'quit', 'stop', or 'bye' to end the conversation.")
     user_name = None
+
+    with open("chatlog.txt", 'w') as log_file:
+            log_file.write("=== New Chat Session Started ===\n\n")
+            
     while True:
+    
         user_input = input("You: ").lower()
         if user_input.lower() in ["exit", "quit", "stop", "bye"]:
             print("Bot: Goodbye!")
+            print("Chat saved to chat_log.txt")
             break
         responses = load_json(file_path)
         if responses is None:
@@ -46,6 +52,11 @@ def main():
                 if key in user_input:
                     response = responses[key]
                     break
+
+        with open("chatlog.txt", 'a') as log_file:
+            log_file.write(f"User: {user_input}\n")
+            log_file.write(f"Bot: {response}\n")
+
         print("Bot:", response)
         
     

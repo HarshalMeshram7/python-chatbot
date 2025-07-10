@@ -1,0 +1,12 @@
+=== New Chat Session Started ===
+
+User: hi
+Bot: Hi there! How can I help you?
+User: how are you
+Bot: I'm just a program, but thank you for asking! How can I help you?
+User: what is my name
+Bot: I don't know your name yet.
+User: what is your name
+Bot: My name is Chatbot. What's your name?
+User: my name is harshal
+Bot: Nice to meet you, harshal!
