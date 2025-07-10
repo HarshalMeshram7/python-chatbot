@@ -16,6 +16,7 @@ def load_json(file_path):
 
 def main():
     print("Welcome to the chatbot! Type 'exit', 'quit', 'stop', or 'bye' to end the conversation.")
+    user_name = None
     while True:
         user_input = input("You: ").lower()
         if user_input.lower() in ["exit", "quit", "stop", "bye"]:
@@ -26,10 +27,25 @@ def main():
             print("Bot: Sorry, I cannot respond at the moment.")
             continue
         response = "I'm not sure how to respond to that."
-        for key in responses:
-            if key in user_input:
-                response = responses[key]
-                break
+        
+        if "my name is" in user_input:
+            user_name = user_input.split("my name is")[-1].strip()
+            response = f"Nice to meet you, {user_name}!"
+        elif "what is your name" in user_input:
+            if user_name is not None:
+                response = f"My name is Chatbot. Nice to meet you, {user_name}!"
+            else:
+                response = "My name is Chatbot. What's your name?"
+        elif "what is my name" in user_input:
+            if user_name is not None:
+                response = f"Your name is {user_name}."
+            else:
+                response = "I don't know your name yet."
+        else: 
+            for key in responses:
+                if key in user_input:
+                    response = responses[key]
+                    break
         print("Bot:", response)
         
     
