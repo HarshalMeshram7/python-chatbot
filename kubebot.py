@@ -1,4 +1,5 @@
 import subprocess
+from gemini_helper import get_kubectl_command
 
 namespacename = None
 
@@ -15,12 +16,19 @@ def logs(user_input):
     parts = user_input.split("pod")
     pod_name = parts[-1].strip()
 
-    if namespacename is None:
-        print("Bot: Please specify the namespace first. Use 'use namespace <namespace>' to set it.")
-    else:
-        output = run_kubectl_command(f"kubectl logs {pod_name} -n {namespacename}")
-        print("Bot:\n" + output)
-        
+    if  "follow" in user_input and "logs" in user_input:
+        if namespacename is None:
+            print("Bot: Please specify the namespace first. Use 'use namespace <namespace>' to set it.")
+        else:
+            output = run_kubectl_command(f"kubectl logs -f {pod_name} -n {namespacename}")
+            print("Bot:\n" + output)
+
+    elif "logs" in user_input:
+        if namespacename is None:
+            print("Bot: Please specify the namespace first. Use 'use namespace <namespace>' to set it.")
+        else:
+            output = run_kubectl_command(f"kubectl logs {pod_name} -n {namespacename}")
+            print("Bot:\n" + output)        
 
 def main():
     global namespacename    
