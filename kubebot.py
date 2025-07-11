@@ -69,7 +69,7 @@ def main():
 
         else:
             # Gemini fallback
-            print("Bot: Let me try to figure this out using Gemini 🤖...")
+            print("Bot: Let me try to figure this out 🤖...")
             raw_cmd = get_kubectl_command(user_input)
 
             if raw_cmd.lower().startswith("error"):
