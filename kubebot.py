@@ -20,9 +20,6 @@ def logs(user_input):
 
     if not namespacename:
         return "Bot: Please set a namespace first using 'use namespace <name>'."
-
-    if "follow" in user_input:
-        return run_kubectl_command(f"kubectl logs -f {pod_name} -n {namespacename}")
     else:
         return run_kubectl_command(f"kubectl logs {pod_name} -n {namespacename}")
 
