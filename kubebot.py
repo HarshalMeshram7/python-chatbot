@@ -78,11 +78,15 @@ def main():
 
             kubectl_cmd = clean_gemini_output(raw_cmd)
 
+            if not kubectl_cmd.startswith("kubectl"):
+                print("Bot: ", kubectl_cmd)
+                continue
+
             # Inject namespace if relevant and missing
             if namespacename and "-n" not in kubectl_cmd:
                 kubectl_cmd += f" -n {namespacename}"
 
-            print(f"Bot (Gemini): Running → {kubectl_cmd}")
+            print(f"Bot: Running → {kubectl_cmd}")
             output = run_kubectl_command(kubectl_cmd)
             print("Bot:\n" + output)
 
